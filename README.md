@@ -4,15 +4,23 @@
 
 - TODO
 
-#### Installation
+## Installation
 
-Oath is available for both server-side and the browser.
+#### Node.js
 
-###### Node.js
-
-Package is available through [npm](http://npmjs.org):
+`comm` is available through [npm](http://npmjs.org):
 
     npm install comm
+
+#### Component
+
+`comm` is available as a [component](https://github.com/component/component).
+
+    component install logicalparadox/comm
+
+## Usage
+
+TODO
 
 ## License
 
