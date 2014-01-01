@@ -1,7 +1,7 @@
 {
   "name": "comm",
-  "version": "0.0.1",
-  "description": "Rust-like communication channels for JavaScript",
+  "version": "0.1.0",
+  "description": "Rust-inspired communication primitives for asyncronous message passing.",
   "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
   "license": "MIT",
   "homepage": "https://github.com/logicalparadox/comm",

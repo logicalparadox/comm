@@ -1,8 +1,16 @@
 # comm
 
+[![Build Status](https://travis-ci.org/logicalparadox/comm.png?branch=master)](https://travis-ci.org/logicalparadox/comm)
+
+> [Rust](http://rust-lang.org/)-inspired communication primitives for asyncronous message passing.
+
 #### Features
 
-- TODO
+- includes simplex and duplex communication patterns
+- designed for use with [co](https://github.com/visionmedia/co) and harmony generators
+- fallback to callbacks in non-generator environments
+- inspired by [rust](http://rust-lang.org)'s [std::comm](http://static.rust-lang.org/doc/master/std/comm/index.html) and 
+[extra::comm](http://static.rust-lang.org/doc/master/extra/comm/index.html) modules
 
 ## Installation
 
@@ -12,13 +20,9 @@
 
     npm install comm
 
-#### Component
-
-`comm` is available as a [component](https://github.com/component/component).
-
-    component install logicalparadox/comm
-
 ## Example
+
+More available in [examples](./examples/).
 
 ```js
 var co = require('co');
