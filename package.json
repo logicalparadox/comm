@@ -22,7 +22,8 @@
     "sherlock": "~1.1.0"
   },
   "devDependencies": {
-    "co": "~3.0.1",
-    "goodwin": "https://github.com/logicalparadox/goodwin/tarball/master"
+    "goodwin": "https://github.com/logicalparadox/goodwin/tarball/master",
+    "co": "https://github.com/logicalparadox/co/tarball/bug/nil",
+    "co-wait": "0.0.0"
   }
 }

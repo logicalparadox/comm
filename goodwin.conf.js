@@ -1,10 +1,13 @@
 module.exports = function(config) {
   config.set({
     globals: {
-      comm: require('./index')
+      Arr: require('./lib/arr').Arr,
+      co: require('co'),
+      comm: require('./index'),
+      wait: require('co-wait')
     },
     tests: [
-      'test/**/*.js'
+      'test/*.js'
     ]
   });
 };
