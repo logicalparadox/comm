@@ -18,6 +18,40 @@
 
     component install logicalparadox/comm
 
+## Example
+
+```js
+var co = require('co');
+var DuplexStream = require('comm').DuplexStream;
+
+function *calc(chan) {
+  var sum = 0, num;
+
+  while (num = yield chan.recv()) {
+    if (null == num) break;
+    sum += num;
+  }
+
+  chan.send(sum);
+  chan.send(null);
+}
+
+co(function *main() {
+  var sock = DuplexStream();
+  var req = sock[0];
+
+  co(calc)(sock[1]);
+
+  req.send(2 * 10);
+  req.send(2 * 20);
+  req.send(2 * 30);
+  req.send(null);
+
+  var res = yield req.recv();
+  console.log(res); // => 120
+})();
+```
+
 ## Usage
 
 TODO
