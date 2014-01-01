@@ -1,7 +1,18 @@
+// external
 var co = require('co');
+
+// internal
 var DuplexStream = require('../index').DuplexStream;
 
-var calc = co(function*(chan) {
+/**
+ * Generator performing calculation. Uses
+ * a while-yield loop to collect data then
+ * responds when no more data will be recieved.
+ *
+ * @param {DuplexStream} duplex channel
+ */
+
+function *calc(chan) {
   var sum = 0, num;
 
   while (num = yield chan.recv()) {
@@ -11,19 +22,26 @@ var calc = co(function*(chan) {
 
   chan.send(sum);
   chan.send(null);
-});
+}
 
-exports.main = co(function*() {
+/**
+ * Create `DuplexStream` pair. Use one
+ * as local rpc channel. Send other to
+ * `calc` as the duplex to listen and
+ * respond on.
+ */
+
+co(function *main() {
   var sock = DuplexStream();
-  var rpc = sock[0];
+  var req = sock[0];
 
-  calc(sock[1]);
+  co(calc)(sock[1]);
 
-  rpc.send(2 * 10);
-  rpc.send(2 * 20);
-  rpc.send(2 * 30);
-  rpc.send(null);
+  req.send(2 * 10);
+  req.send(2 * 20);
+  req.send(2 * 30);
+  req.send(null);
 
-  var res = yield rpc.recv();
+  var res = yield req.recv();
   console.log(res);
 })();

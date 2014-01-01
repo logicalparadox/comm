@@ -1,7 +1,18 @@
-var Chan = require('../index').Chan;
+// external
 var co = require('co');
 
-var calc = co(function*(port) {
+// internal
+var Chan = require('../index').Chan;
+
+/**
+ * Generator performing calculation. Uses
+ * a while-yield loop to collect data then
+ * logs the result.
+ *
+ * @param {Port} port
+ */
+
+function *calc(port) {
   var sum = 0, num;
 
   while (num = yield port.recv()) {
@@ -10,13 +21,19 @@ var calc = co(function*(port) {
   }
 
   console.log(sum);
-});
+}
 
-exports.main = co(function*() {
+/**
+ * Create `[ port, chan ]` pair. Use `chan`
+ * as local request channel. Send `port` to
+ * `calc` as the port to listen on.
+ */
+
+co(function *main() {
   var sock = Chan();
   var chan = sock[1];
 
-  calc(sock[0]);
+  co(calc)(sock[0]);
 
   chan.send(2 * 10);
   chan.send(2 * 20);
