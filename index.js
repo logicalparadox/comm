@@ -1,6 +1,7 @@
 
 // utilities (should be extracted)
-exports.Deque = require('./lib/deque').Deque;
+exports.Queue = require('./lib/queue').Queue;
+exports.DistributedQueue = require('./lib/queue.distributed').DistributedQueue;
 
 // channels
 exports.Chan = require('./lib/chan').Chan;
