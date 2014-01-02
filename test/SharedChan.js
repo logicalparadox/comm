@@ -18,7 +18,7 @@ test('delivery with single clone', function(done) {
   co(function*() {
     var sock = SharedChan();
     var port = sock[0];
-    var chan = sock[1].clone();
+    var chan = yield sock[1].clone();
 
     co(send)(chan);
 
@@ -41,17 +41,21 @@ test('delivery with single clone', function(done) {
 });
 
 test('deliver with multiple clones', function(done) {
+  function *send(a, b, c) {
+    yield a.send('a');
+    yield b.send('b');
+    yield c.send('c');
+  }
+
   co(function*() {
     var sock = SharedChan();
     var port = sock[0];
 
-    var chana = sock[1].clone();
-    var chanb = sock[1].clone();
-    var chanc = sock[1].clone();
+    var chana = yield sock[1].clone();
+    var chanb = yield sock[1].clone();
+    var chanc = yield sock[1].clone();
 
-    chana.send('a');
-    chanb.send('b');
-    chanc.send('c');
+    co(send)(chana, chanb, chanc);
 
     var a = yield port.recv();
     var b = yield port.recv();
