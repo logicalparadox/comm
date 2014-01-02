@@ -26,7 +26,7 @@ More available in [examples](./examples/).
 
 ```js
 var co = require('co');
-var DuplexStream = require('comm').DuplexStream;
+var Duplex = require('comm').Duplex;
 
 function *calc(chan) {
   var sum = 0, num;
