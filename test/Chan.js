@@ -1,9 +1,12 @@
+var Chan = comm.Chan;
+var Port = comm.Port;
+
 test('creates a port/chan pair via create', function(done) {
   co(function*() {
     var sock = Chan();
     sock.should.be.an('array');
-    sock[0].should.be.instanceof(comm.Port);
-    sock[1].should.be.instanceof(comm.Chan);
+    sock[0].should.be.instanceof(Port);
+    sock[1].should.be.instanceof(Chan);
 
     var msgs = [];
 

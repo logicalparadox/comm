@@ -1,3 +1,5 @@
+var Chan = comm.Chan;
+
 test('single message', function(done) {
   var msgs = [];
 

@@ -1,3 +1,5 @@
+var Deque = comm.Deque;
+
 test('adds item to queue if no waiting', function(done) {
   co(function*() {
     var deque = new Deque();
