@@ -40,7 +40,7 @@ function *calc(chan) {
 }
 
 co(function *main() {
-  var sock = DuplexStream();
+  var sock = Duplex();
   var req = sock[0];
 
   co(calc)(sock[1]);

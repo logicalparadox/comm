@@ -1,6 +1,6 @@
 {
   "name": "comm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rust-inspired communication primitives for asyncronous message passing.",
   "author": "Jake Luer <jake@alogicalparadox.com> (http://alogicalparadox.com)",
   "license": "MIT",
