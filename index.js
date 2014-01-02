@@ -1,4 +1,5 @@
 
+exports.Deque = require('./lib/deque').Deque;
 exports.Chan = require('./lib/chan').Chan;
 exports.Port = require('./lib/port').Port;
-exports.DuplexStream = require('./lib/duplex').DuplexStream;
+exports.Duplex = require('./lib/duplex').Duplex;

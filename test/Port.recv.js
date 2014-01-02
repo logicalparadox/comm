@@ -1,5 +1,3 @@
-var Port = comm.Port;
-
 test('single message', function(done) {
   var msgs = [ { hello: 'universe' } ];
 

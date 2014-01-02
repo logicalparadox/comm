@@ -1,5 +1,3 @@
-var Chan = comm.Chan;
-
 test('creates a port/chan pair via create', function(done) {
   co(function*() {
     var sock = Chan();
