@@ -16,7 +16,6 @@ function *calc(port) {
   var sum = 0, num;
 
   while (num = yield port.recv()) {
-    if (null === num) break;
     sum += num;
   }
 

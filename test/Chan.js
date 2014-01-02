@@ -1,7 +1,7 @@
 var Chan = comm.Chan;
 var Port = comm.Port;
 
-test('creates a port/chan pair via create', function(done) {
+test('returns a port/chan pair via create', function(done) {
   co(function*() {
     var sock = Chan();
     sock.should.be.an('array');
@@ -12,8 +12,8 @@ test('creates a port/chan pair via create', function(done) {
 
     co(function*(port) {
       var msg;
+
       while (msg = yield port.recv()) {
-        if (null === msg) break;
         msgs.push(msg);
       }
     })(sock[0]);

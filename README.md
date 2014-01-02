@@ -32,7 +32,6 @@ function *calc(chan) {
   var sum = 0, num;
 
   while (num = yield chan.recv()) {
-    if (null == num) break;
     sum += num;
   }
 
