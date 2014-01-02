@@ -9,13 +9,18 @@ test('returns array of [ port, sharedchan ]', function() {
 });
 
 test('delivery with single clone', function(done) {
+  function *send(chan) {
+    yield chan.send('a');
+    yield chan.send('b');
+    yield chan.send('c');
+  }
+
   co(function*() {
     var sock = SharedChan();
     var port = sock[0];
     var chan = sock[1].clone();
-    chan.send('a');
-    chan.send('b');
-    chan.send('c');
+
+    co(send)(chan);
 
     var a = yield port.recv();
     var b = yield port.recv();
@@ -28,6 +33,7 @@ test('delivery with single clone', function(done) {
     chan.send(null);
     var exit = yield port.recv();
     assert.equal(exit, null);
+
     chan.closed.should.be.true;
     sock[1].closed.should.be.true;
     port.closed.should.be.true;
