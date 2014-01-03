@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "goodwin": "https://github.com/logicalparadox/goodwin/tarball/master",
-    "co": "https://github.com/logicalparadox/co/tarball/bug/nil",
-    "co-wait": "0.0.0"
+    "co": "~3.0.2",
+    "co-wait": "~0.0.0"
   }
 }
