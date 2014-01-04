@@ -1,45 +1,43 @@
 var Chan = comm.Chan;
+var Queue = comm.Queue;
+var Producer = comm.scsp.Producer;
 
-test('single message', function(done) {
-  var msgs = [];
+test('single message', co(function*() {
+  var queue = new Queue();
+  var producer = new Producer(queue);
+  var chan = new Chan(producer);
 
-  var deliver = co(function*(msg) {
-    yield wait(10);
-    msgs.push(msg);
-  });
+  var send = chan.send({ hello: 'universe' });
 
-  co(function*() {
-    var chan = new Chan(deliver);
-    var sent = yield chan.send({ hello: 'universe' });
-    sent.should.be.true;
-    msgs.should
-      .have.lengthOf(1)
-      .with.deep.property('[0]')
-      .that.deep.equals({ hello: 'universe' });
-  })(done);
-});
+  queue.should.have.lengthOf(1);
+  var msg = yield queue.shift();
+  msg.should.deep.equal({ hello: 'universe' });
 
-test('message then end', function(done) {
-  var msgs = [];
+  var sent = yield send;
+  sent.should.be.true;
+}));
 
-  var deliver = co(function*(msg) {
-    yield wait(10);
-    msgs.push(msg);
-  });
+test('message then end', co(function*() {
+  var queue = new Queue();
+  var producer = new Producer(queue);
+  var chan = new Chan(producer);
+  chan.closed.should.be.false;
 
-  co(function*() {
-    var chan = new Chan(deliver);
-    chan.closed.should.be.false;
+  var one = chan.send({ hello: 'universe' });
+  chan.closed.should.be.false;
 
-    var one = yield chan.send({ hello: 'universe' });
-    one.should.be.true;
-    chan.closed.should.be.false;
+  var exit = chan.send(null);
+  chan.closed.should.be.true;
 
-    var exit = yield chan.send(null);
-    exit.should.be.true;
-    chan.closed.should.be.true;
+  queue.should.have.lengthOf(2)
 
-    msgs.should.have.lengthOf(2)
-    assert.equal(msgs[1], null);
-  })(done);
-});
+  var mone = yield queue.shift();
+  mone.should.deep.equal({ hello: 'universe' });
+  var mexit = yield queue.shift();
+  assert.equal(mexit, null);
+
+  one = yield one;
+  exit = yield exit;
+  one.should.be.true;
+  exit.should.be.true;
+}));
