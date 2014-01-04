@@ -13,3 +13,6 @@ exports.SharedPort = require('./lib/port.shared').SharedPort;
 
 // sugar
 exports.Duplex = require('./lib/duplex').Duplex;
+
+// stuffs
+exports.scsp = require('./lib/scsp');

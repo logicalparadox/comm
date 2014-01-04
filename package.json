@@ -18,11 +18,13 @@
   },
   "dependencies": {
     "oath": "~1.0.0",
-    "sherlock": "~1.1.0"
+    "sherlock": "~1.1.0",
+    "super": "~0.2.3"
   },
   "devDependencies": {
     "goodwin": "https://github.com/logicalparadox/goodwin/tarball/master",
     "co": "~3.0.2",
-    "co-wait": "~0.0.0"
+    "co-wait": "~0.0.0",
+    "transmute": "~0.2.0"
   }
 }
