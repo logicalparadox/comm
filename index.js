@@ -9,4 +9,4 @@ exports.Duplex = require('./lib/duplex').Duplex;
 
 // stuffs
 exports.deque = require('./lib/deque');
-exports.scsp = require('./lib/scsp');
+exports.queue = require('./lib/queue');
