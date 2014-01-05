@@ -1,5 +1,5 @@
 var Chan = comm.Chan;
-var Queue = comm.Queue;
+var Queue = comm.deque.Queue;
 var Producer = comm.scsp.Producer;
 
 test('single message', co(function*() {

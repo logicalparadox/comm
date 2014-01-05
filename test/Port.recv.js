@@ -1,5 +1,5 @@
 var Port = comm.Port;
-var Queue = comm.Queue;
+var Queue = comm.deque.Queue;
 var Consumer = comm.scsp.Consumer;
 
 test('single message', co(function*() {

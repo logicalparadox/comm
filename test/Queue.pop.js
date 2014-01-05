@@ -1,4 +1,4 @@
-var Queue = comm.Queue;
+var Queue = comm.deque.Queue;
 
 test('waits if no itesm in queue', function(done) {
   co(function*() {

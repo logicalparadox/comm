@@ -1,4 +1,4 @@
-var Queue = comm.Queue;
+var Queue = comm.deque.Queue;
 
 test('resolves when queue has drained', function(done) {
   function *get(queue) {
