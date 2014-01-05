@@ -8,10 +8,11 @@ test('single message', co(function*() {
   var chan = new Chan(producer);
 
   var send = chan.send({ hello: 'universe' });
-
   queue.should.have.lengthOf(1);
+
   var msg = yield queue.shift();
-  msg.should.deep.equal({ hello: 'universe' });
+  msg[0][1].should.deep.equal({ hello: 'universe' });
+  msg[1](); // confirm recieve
 
   var sent = yield send;
   sent.should.be.true;
@@ -32,9 +33,12 @@ test('message then end', co(function*() {
   queue.should.have.lengthOf(2)
 
   var mone = yield queue.shift();
-  mone.should.deep.equal({ hello: 'universe' });
+  mone[0][1].should.deep.equal({ hello: 'universe' });
+  mone[1]();
+
   var mexit = yield queue.shift();
-  assert.equal(mexit, null);
+  assert.equal(mexit[0][1], null);
+  mexit[1]();
 
   one = yield one;
   exit = yield exit;
