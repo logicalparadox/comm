@@ -7,7 +7,7 @@ test('single message', co(function*() {
   var consumer = new Consumer(queue);
   var port = new Port(consumer);
 
-  queue.push({ hello: 'universe' });
+  queue.push([[ null, { hello: 'universe' } ]]);
 
   var msg = yield port.recv();
   msg.should.deep.equal({ hello: 'universe' });
@@ -19,8 +19,8 @@ test('message then end', co(function*() {
   var port = new Port(consumer);
   port.closed.should.be.false;
 
-  queue.push({ hello: 'universe' });
-  queue.push(null);
+  queue.push([[ null, { hello: 'universe' }]]);
+  queue.push([[ null, null ]]);
 
   var msg = yield port.recv();
   msg.should.deep.equal({ hello: 'universe' });
